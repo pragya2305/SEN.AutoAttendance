@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof_page</title>
+</head>
+<body>
+   
+      
+      <input id ="course" name = "course" type="text" placeholder="enter course code">
+      <button type="submit" onclick="qrLoop()">Submit</button>
+    
+
+
+    hello
+    <div id="qrcode">
+
+    </div>
+
+    
+</body>
+<script src="{% static "prof_section/js/qrcode.js" %}"></script>
+  <script>
+    function qrLoop(){
+
+      var qr = new QRCode(document.getElementById("qrcode"));
+      var course = document.getElementById("course");
+      var url = "/getqr?course=" + course.value;
+      
+      setInterval(function(){
+            var xhttp = new XMLHttpRequest();
+            
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                  // Typical action to be performed when the document is ready:
+                  
+                  
+                  var obj = JSON.parse(xhttp.responseText);
+                  var ele = document.getElementById("qrcode");
+                  qr.makeCode(obj.no);
+                
+                }
+            };
+            xhttp.open("get", url , true);
+            xhttp.send();
+
+
+            }, {{ time }} ) ;
+    }
+  </script>
+</html>
