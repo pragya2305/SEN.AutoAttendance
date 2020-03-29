@@ -4,27 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "prof_section/css/index.css" %}"">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Prof_page</title>
-</head>
-<body>
-   
-      
-      <input id ="course" name = "course" type="text" placeholder="enter course code">
-      <button type="submit" onclick="qrLoop()">Submit</button>
     
+</head>
+<body class="container">
+   
+      <div class="center-align">
+        <input id ="course" name = "course" type="text" placeholder="enter course code">
+        <button class ="btn" type="submit" onclick="qrLoop()">Submit</button>
+      </div>
 
 
-    hello
-    <div id="qrcode">
+    
+    <div id="qrcode" class="qrcode">
 
     </div>
+
+    <h2 class="message">Scan this for attendance</h2>
 
     
 </body>
 <script src="{% static "prof_section/js/qrcode.js" %}"></script>
   <script>
     function qrLoop(){
-
+      var heading = document.getElementsByClassName("message");
+      heading[0].style.visibility = "visible";
       var qr = new QRCode(document.getElementById("qrcode"));
       var course = document.getElementById("course");
       var url = "/getqr?course=" + course.value;
@@ -49,5 +55,6 @@
 
             }, {{ time }} ) ;
     }
+    
   </script>
 </html>

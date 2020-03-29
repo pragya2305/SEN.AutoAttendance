@@ -1,0 +1,17 @@
+body{
+    background-color: beige;
+}
+.btn{
+    margin: 0 auto;
+}
+input::placeholder{
+    color: black;
+}
+.qrcode img{
+    margin: 100px auto;
+}
+.message{
+    margin: 50px auto;
+    visibility: hidden;
+    text-align: center;
+}
