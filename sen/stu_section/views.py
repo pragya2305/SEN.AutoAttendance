@@ -1,17 +1,11 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from django.contrib.auth.models import User
 from django.contrib.auth import logout,authenticate,login
 from django.contrib.auth.forms import AuthenticationForm
+from prof_section.models import AttendanceRecord
 from django.contrib.auth.decorators import login_required
-import random
 from django.http import JsonResponse
-import hashlib
+from datetime import datetime
 
-no = 0
-qrCodeStayTime = 1000
-
-# Create your views here.
 def loginView(request):
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -21,7 +15,7 @@ def loginView(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index/')
+                return redirect('/scan')
             else:
                 message="Invalid username or password."
                 return render(request = request,
@@ -39,29 +33,27 @@ def loginView(request):
                     template_name = "login.html",
                     context={"form":form})
 
+
+
 @login_required(login_url='/login')
-def index(request):
-
-    if request.method == "POST":
-        course = request.POST["course"]
-        return render(request,"index.html",{"qr": course,"time":qrCodeStayTime})
-
-    else:    
-        return render(request,"index.html",{"qr": "","time":qrCodeStayTime})
+def scan(request):
+    return render(request,"scan.html")
 
 
-def getqr(request):
+def test(request):
     
-    course = request.GET["course"]
-    no = random.randint(0,299)
+    qr = request.POST['qr']
+    usernm = request.user
+    
+    attRec = AttendanceRecord()
+    attRec.studentID = usernm
+    attRec.courseID = qr
+    attRec.dateTime = datetime.now()
 
     
+    attRec.save()
     
     data={
-        "no" : course+str(no),
+        "message":"done"
     }
-    
     return JsonResponse(data)
-
-
-
