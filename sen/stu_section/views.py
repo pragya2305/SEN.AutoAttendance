@@ -19,25 +19,25 @@ def loginView(request):
             else:
                 message="Invalid username or password."
                 return render(request = request,
-                    template_name = "login.html",
+                    template_name = "stu_section/login.html",
                     context={"form":form,
                             "message":message})
         else:
             message= "Invalid username or password."
             return render(request = request,
-                    template_name = "login.html",
+                    template_name = "stu_section/login.html",
                     context={"form":form,
                             "message":message})
     form = AuthenticationForm()
     return render(request = request,
-                    template_name = "login.html",
+                    template_name = "stu_section/login.html",
                     context={"form":form})
 
 
 
 @login_required(login_url='/login')
 def scan(request):
-    return render(request,"scan.html")
+    return render(request,"stu_section/scan.html")
 
 
 def test(request):

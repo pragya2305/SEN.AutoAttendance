@@ -5,18 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static "stu_section/css/scan.css" %}"">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Document</title>
 </head>
 <body>
-    <style>
-        #preview{
-           width:500px;
-           height: 500px;
-           margin:0px auto;
-        }
-        </style>
-        <video id="preview"></video>
-        
+
+
+    <div class="container">
+        <video class="screen" id="preview"></video>
+    </div>
+
+
+
+    <div class="center-align">
     <div class="btn-group btn-group-toggle mb-5" data-toggle="buttons">
         <label class="btn btn-primary active">
           <input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
@@ -25,6 +27,8 @@
           <input type="radio" name="options" value="2" autocomplete="off"> Back Camera
         </label>
       </div>
+    </div>
+
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

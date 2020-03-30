@@ -7,9 +7,11 @@ from django.contrib.auth.decorators import login_required
 import random
 from django.http import JsonResponse
 import hashlib
+from . import models
 
 no = 0
-qrCodeStayTime = 1000
+qrCodeStayTime = 10000
+reloadTime = 10 * 60 * 1000
 
 # Create your views here.
 def loginView(request):
@@ -25,29 +27,34 @@ def loginView(request):
             else:
                 message="Invalid username or password."
                 return render(request = request,
-                    template_name = "login.html",
+                    template_name = "prof_section/login.html",
                     context={"form":form,
                             "message":message})
         else:
             message= "Invalid username or password."
             return render(request = request,
-                    template_name = "login.html",
+                    template_name = "prof_section/login.html",
                     context={"form":form,
                             "message":message})
     form = AuthenticationForm()
     return render(request = request,
-                    template_name = "login.html",
+                    template_name = "prof_section/login.html",
                     context={"form":form})
 
 @login_required(login_url='/login')
 def index(request):
 
-    if request.method == "POST":
-        course = request.POST["course"]
-        return render(request,"index.html",{"qr": course,"time":qrCodeStayTime})
+    username = request.user
+    prof_obj = models.Prof.objects.filter(user__username = username)
+    courses  = prof_obj[0].courses.split(",")
+    
+    context ={
+            "time" : qrCodeStayTime, 
+            "courses" : courses,
+            "reloadTime": reloadTime
+    }
 
-    else:    
-        return render(request,"index.html",{"qr": "","time":qrCodeStayTime})
+    return render(request,"prof_section/index.html",context)
 
 
 def getqr(request):
