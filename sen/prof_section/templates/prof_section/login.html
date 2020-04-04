@@ -5,21 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prof_Section</title>
-    <link rel="stylesheet" href="{% static "prof_section/css/login.css" %}"">
+    <link rel="stylesheet" href="{% static "./one.css" %}"">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 </head>
-<body>
+<body>    
+
+<div class="login_form">
+  <setion class="login-wrapper">
     
-    <div class="container center-align">
-        <h1 style="color: cadetblue; ">
-            Proffessor's Page
-        </h1>
-        <form method="POST" class="form">
-        {% csrf_token %}
-        {{form.as_p}}
-            <button class = "btn" type="submit">Login</button>
-        </form>
+    <div class="logo">
+         <a src='https://photos.google.com/share/AF1QipOMsLFTkn097UGmQoKUVyr7C_QmA8p7wiVPc9AKjffBPG2BEbb-1U1zmzie4h0L1g?key=cGlDemZNRmVkUFZfT1BlWVhOeVhuZnZ6Nmc5NDZ3&source=ctrlq.org'><img src='https://lh3.googleusercontent.com/5M437DIjMKOXSwg2Dso-rxovUTjN8s0JbdkXPR-Nlq_QSz0QIg-pnGCUckzAj2mYV2fJXgglF2DPfUVg2zmtTULH-BLf2F1ZM_Y_g6JlrOQccOZbTfd1majemCKjooOGAQE49mxCaQ=w2400'height="200" width="250"></a>
     </div>
+    
+    <form id="login" method="post" action="#">
+     
+      <label for="username">User Name</label>
+      <input  required name="login[username]" type="text" autocapitalize="off" autocorrect="off"/>
+      
+      <label for="password">Password</label>
+      <input class="password" required name="login[password]" type="password" />
+      <div class="hide-show">
+        <span>Show</span>
+      </div>
+      <button type="submit">Sign In</button>
+    </form>
+    
+  </section>
+</div>
+
+
+
+
 </body>
 </html>
