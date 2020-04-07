@@ -1,18 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student_Section</title>
-</head>
-<body>
+    <link rel="stylesheet" href="{% static "stu_section/css/login.css" %}"">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <div class="container">
-        <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-            <button type="submit">Login</button>
-        </form>
+</head>
+<body>    
+
+<div class="login_form">
+  <section class="login-wrapper">
+    <div id="log"> ENTER YOUR CREDENTIALS </div>
+   <!-- 
+    <div class="logo">
+         <a src='https://photos.google.com/share/AF1QipOMsLFTkn097UGmQoKUVyr7C_QmA8p7wiVPc9AKjffBPG2BEbb-1U1zmzie4h0L1g?key=cGlDemZNRmVkUFZfT1BlWVhOeVhuZnZ6Nmc5NDZ3&source=ctrlq.org'><img src='https://lh3.googleusercontent.com/5M437DIjMKOXSwg2Dso-rxovUTjN8s0JbdkXPR-Nlq_QSz0QIg-pnGCUckzAj2mYV2fJXgglF2DPfUVg2zmtTULH-BLf2F1ZM_Y_g6JlrOQccOZbTfd1majemCKjooOGAQE49mxCaQ=w2400'height="200" width="250"></a>
     </div>
+ -->   
+   <form id="login" method="POST" action="#">
+      {% csrf_token %}
+      {{form.as_p}}
+	  
+      <button type="submit">Sign In</button>
+    </form>
+    
+  </section>
+</div>
+
 </body>
 </html>
